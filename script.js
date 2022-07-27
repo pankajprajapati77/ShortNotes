@@ -7,9 +7,11 @@ let modalPriorityColor = colors[colors.length - 1]; //black
 let textAreaCont = document.querySelector(".textarea-cont");
 const mainCont = document.querySelector(".main-cont");
 let removebtn = document.querySelector(".remove-btn");
-
 let ticketsArr = [];
 let toolboxcolors = document.querySelectorAll(".color");
+
+let lockClass = "fa-lock";
+let unlockClass = "fa-lock-open";
 
 //to open close modal container
 let isModalPresent = false;
@@ -52,7 +54,7 @@ modalCont.addEventListener("keydown", function (e) {
         textAreaCont.value = "";
         allPriorityColors.forEach(function (colorElem) {
             colorElem.classList.remove("active");
-        })
+        });
     }
 });
 
@@ -65,13 +67,16 @@ function createTicket(ticketColor, data, ticketId) {
         <div class="ticket-color ${ticketColor} "></div>
         <div class="ticket-id">${id}</div>
         <div class="task-area">${data}</div>
+        <div class="ticket-lock">
+           <i class="fa-solid fa-lock"></i>
+        </div>   
     `;
 
     mainCont.appendChild(ticketCont);
 
-    handleRemoval(ticketCont, id);
-    handelcolor(ticketCont, id);
-    handleLock(ticketCont, id);
+handleRemoval(ticketCont, id);
+handelcolor(ticketCont, id);
+handleLock(ticketCont, id);
 
 //if ticket is being created for the first time, then ticketid would be undefined
 if(!ticketId){
@@ -99,7 +104,9 @@ for(let i = 0; i < toolboxcolors.length; i++){
         let currToolBoxColor = toolboxcolors[i].classList[0];
 
         let filteredTickets = ticketsArr.filter(function(ticketObj){
-            return currToolBoxColor == ticketObj.ticketColor;
+            if(currToolBoxColor == ticketObj.ticketColor);
+            return ticketObj;
+            // return currToolBoxColor == ticketObj.ticketColor;
         });
         
         //remove all the tickets
@@ -119,6 +126,7 @@ for(let i = 0; i < toolboxcolors.length; i++){
     })
     //to display all the tickets of all colors on double clicking
     toolboxcolors[i].addEventListener("dblclick", function(){
+        
         //remove all the color specific tickets
         let alltickets = document.querySelectorAll(".ticket-cont");
         for(let i = 0; i < alltickets.length; i++){
@@ -194,5 +202,27 @@ function handelcolor(ticket, id){
 
 //lock and unlock to make content editable true or false
 function handleLock(ticket, id){
+    
+    //icons to append in ticket
+    let ticketLockEle = ticket.querySelector(".ticket-lock");
+    let ticketLock = ticketLockEle.children[0];
+    let ticketTaskArea = ticket.querySelector(".task-area");
+    //console.log(ticketLock);
 
+    //toggle of icons and contenteditable property
+    ticketLock.addEventListener("click", function(){
+        let ticketIdx = getTicketIdx(id);
+        if(ticketLock.classList.contains(lockClass)){
+            ticketLock.classList.remove(lockClass);
+            ticketLock.classList.add(unlockClass);
+            ticketTaskArea.setAttribute("contenteditable", "true");
+        }
+        else{//if lock is open
+            ticketLock.classList.remove(unlockClass);
+            ticketLock.classList.add(lockClass);
+            ticketTaskArea.setAttribute("contenteditable", "false");
+        }
+        ticketsArr[ticketIdx].data = ticketTaskArea.innerText;
+        localStorage.setItem("tickets", JSON.stringify(ticketsArr));
+    });
 }
