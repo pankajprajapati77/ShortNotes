@@ -105,8 +105,8 @@ for(let i = 0; i < toolboxcolors.length; i++){
 
         let filteredTickets = ticketsArr.filter(function(ticketObj){
             if(currToolBoxColor == ticketObj.ticketColor);
-            return ticketObj;
-            // return currToolBoxColor == ticketObj.ticketColor;
+            // return ticketObj;
+            return currToolBoxColor == ticketObj.ticketColor;
         });
         
         //remove all the tickets
@@ -182,7 +182,7 @@ function handelcolor(ticket, id){
 
     ticketColorStrip.addEventListener("click", function(){
         let currticketColor = ticketColorStrip.classList[1];//lightpink
-        //["lightpink", "lightgreen", "lightblue", "black"];
+        // ["lightpink", "lightgreen", "lightblue", "black"];
         let currticketColorIdx = colors.indexOf(currticketColor);
 
         let newTicketColorIdx = currticketColorIdx + 1;
