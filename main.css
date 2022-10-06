@@ -5,22 +5,34 @@
   body {
     margin: 0;
     padding: 0;
+    background-color: #4a4747f7;
+  }
+  .background_image{
+    /* width: 50%; */
+    /* height: 50%; */
+    /* opacity: %; */
+    background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        /* filter: brightness(20%); */
+        background-size: 100% 100%;
+        
   }
   
   .toolbox-cont{
     height:5rem;
-    background-color: #4b4b4b;
+    background-color: rgb(23, 21, 21);
     display: flex;
     align-items: center;
   }
   
   .toolbox-cont>*{
-    margin-left: 4rem;
+    margin-left: 1rem;
   }
   
   .toolbox-color-cont{
     height:3.5rem;
-    width:18rem;
+    width:35rem;
     background-color: #3d3d3d;
     display: flex;
     align-items: center;
@@ -34,11 +46,27 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    margin-left: 14rem;
   }
   
   .color{
-    height:1.5rem;
-    width:3rem;
+    height:1.75rem;
+    width:4rem;
+  }
+  .star{
+    color: goldenrod;
+  }
+  .starPink{
+    font-size: 2.3rem;
+  }
+  .stargreen{
+    font-size:1.5rem ;
+  }
+  .starblue{
+    font-size:1rem ;
+  }
+  .starblack{
+    font-size:0.75rem ;
   }
   
   .lightpink{
@@ -81,7 +109,7 @@
   textarea{
     height:100%;
     width:75%;
-    background-color:#dfe4ea ;
+    background-color:#b5b7b9 ;
     font-size:2rem;
     border:none;
     outline:none;
@@ -109,9 +137,9 @@
   
   
   .ticket-cont{
-    height: 12rem;
+    height: 15rem;
     width:15rem;
-    background-color: #f1f2f6;
+    background-color: #e0e0e0;
   }
   
   .ticket-color{
@@ -121,7 +149,13 @@
   
   .ticket-id{
     height:2rem;
-    background-color: red;
+    background-color: rgb(98, 93, 37);
+    color: rgb(252, 252, 252);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.05rem;
+    
   }
   
   .task-area{
@@ -145,10 +179,28 @@
     padding: 2rem;
     flex-wrap: wrap;
   }
-
-
-
-  
   .main-cont{
     display:flex;
+  }
+
+  @media screen and (max-width: 660px) { 
+    .toolbox-cont{
+      display: flex;
+      flex-direction: column;
+    }
+    .toolbox-cont{
+      height:8rem;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .action-btn-cont{
+      margin-left: 1rem;
+    }
+    .toolbox-color-cont{
+      height:2.5rem;
+      width:25rem;
+      margin-right: 1rem;
+    }
+
   }
